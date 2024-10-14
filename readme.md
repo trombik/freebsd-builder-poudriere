@@ -11,6 +11,12 @@ well:
 * sudo
 * bash
 * curl
+* poudriere
+* tree
+* git
+
+The VM is intended for `poudriere` build on GitHub Actions, i.e. building
+ports.
 
 Except for the root user, there's one additional user, `runner`, which is the
 user that will be running the commands in the GitHub action. This user is
@@ -23,14 +29,6 @@ The following architectures and versions are supported:
 | Version | x86-64 | ARM64 |
 |---------|--------|-------|
 | 14.1    | ✓      | ✓     |
-| 14.0    | ✓      | ✓     |
-| 13.4    | ✓      | ✓     |
-| 13.3    | ✓      | ✓     |
-| 13.2    | ✓      | ✓     |
-| 13.1    | ✓      | ✓     |
-| 13.0    | ✓      | ✓     |
-| 12.4    | ✓      | ✓     |
-| 12.2    | ✓      | ✗     |
 
 ## Building Locally
 
