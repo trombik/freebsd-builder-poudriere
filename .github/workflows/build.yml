@@ -57,7 +57,8 @@ jobs:
         run: |
           packer init freebsd.pkr.hcl
           ./build.sh '${{ matrix.version }}' '${{ matrix.architecture.name }}' \
-            -var 'headless=true'
+            -var 'headless=true' \
+            -var 'disk_size=30G'
 
       - name: Copy from previous release
         if: matrix.copy_from_previous_release
