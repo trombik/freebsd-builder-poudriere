@@ -14,8 +14,10 @@ minimize_disk() {
 
 minimize_swap() {
   local swap_device=$(swapctl -l | awk '!/^Device/ { print $1 }')
+  swapinfo -h
   swapctl -d "$swap_device"
-  dd if=/dev/zero of="$swap_device" bs=1M || :
+  # XXX disabled because `dd` hangs here
+  # dd if=/dev/zero of="$swap_device" bs=1M || :
 }
 
 cleanup
