@@ -70,12 +70,14 @@ jobs:
           PACKER_LOG: 1
         shell: sh
         run: |
-          MEMORY=8192
+          MEMORY=10240
 
           # the VM does not boot on aarch64:
           # qemu-system-aarch64: Addressing limited to 32 bits
           if [ ${{ matrix.architecture.name }} = "arm64" ]; then
-            MEMORY=4096
+
+            # max memory when hardware acceleration on Apple Silicon is enabled
+            MEMORY=3072
           fi
           packer init freebsd.pkr.hcl
           ./build.sh '${{ matrix.version }}' '${{ matrix.architecture.name }}' \
