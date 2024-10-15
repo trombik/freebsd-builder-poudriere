@@ -30,19 +30,15 @@ jobs:
     steps:
       - name: Maximize build space
         if: runner.os == 'Linux'
-        # 0.8.1
-        uses: hugoalh/disk-space-optimizer-ghaction@473a0f269fe1dd4642c48518a323b231680428aa
+        uses: AdityaGarg8/remove-unwanted-software@8831c82abf29b34eb2caac48d5f999ecfc0d8eef
         with:
-          operate_sudo: "True"
-          apt_enable: "True"
-          apt_prune: "True"
-          apt_clean: "True"
-          general_include: ".+"
-          docker_prune: "True"
-          docker_clean: "True"
-          npm_enable: "True"
-          npm_prune: "True"
-          npm_clean: "True"
+          remove-android: 'true'
+          remove-dotnet: 'true'
+          remove-haskell: 'true'
+          remove-codeql: 'true'
+          remove-docker-images: 'true'
+          remove-large-packages: 'true'
+          remove-cached-tools: 'true'
 
       - name: Clone Repository
         uses: actions/checkout@v4
