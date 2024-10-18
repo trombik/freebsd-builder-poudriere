@@ -59,6 +59,7 @@ jobs:
           remove-docker-images: 'true'
           remove-large-packages: 'true'
           remove-cached-tools: 'true'
+          remove-swapfile: 'true'
 
       - name: Clone Repository
         uses: actions/checkout@v4
