@@ -68,6 +68,10 @@ jobs:
           temp-reserve-mb: 100
           swap-size-mb: 4096
 
+      - name: Show df
+        run: |
+          df -h
+
       - name: Clone Repository
         uses: actions/checkout@v4
         with:
