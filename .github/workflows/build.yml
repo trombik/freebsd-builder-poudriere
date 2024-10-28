@@ -83,7 +83,7 @@ jobs:
           PACKER_LOG: 1
         shell: sh
         run: |
-          MEMORY=10240
+          MEMORY=8192
 
           # the VM does not boot on aarch64:
           # qemu-system-aarch64: Addressing limited to 32 bits
