@@ -64,7 +64,7 @@ jobs:
         if: runner.os == 'Linux'
         uses: easimon/maximize-build-space@fc881a613ad2a34aca9c9624518214ebc21dfc0c
         with:
-          root-reserve-mb: 1024
+          root-reserve-mb: 10240
           temp-reserve-mb: 100
           swap-size-mb: 4096
 
