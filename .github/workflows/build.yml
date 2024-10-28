@@ -71,6 +71,7 @@ jobs:
       - name: Show df
         run: |
           df -h
+          pwd
 
       - name: Clone Repository
         uses: actions/checkout@v4
