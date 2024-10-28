@@ -59,12 +59,19 @@ jobs:
           remove-docker-images: 'true'
           remove-large-packages: 'true'
           remove-cached-tools: 'true'
-          remove-swapfile: 'true'
+
+      - name: Concatenates the free space on / and /mnt
+        if: runner.os == 'Linux'
+        uses: easimon/maximize-build-space@fc881a613ad2a34aca9c9624518214ebc21dfc0c
+        with:
 
       - name: Clone Repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
+          root-reserve-mb: 1024
+          temp-reserve-mb: 100
+          swap-size-mb: 4096
 
       - name: Install Dependencies
         run: |
