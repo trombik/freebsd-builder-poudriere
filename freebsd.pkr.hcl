@@ -141,7 +141,7 @@ source "qemu" "qemu" {
   boot_wait = "6s"
 
   boot_command = [
-    "2<wait30s>",
+    "2<wait60s>",
     "<enter><wait10>",
     "mdmfs -s 100m md1 /tmp<enter><wait>",
     "dhclient -l /tmp/dhclient.leases -p /tmp/dhclient.pid vtnet0<enter><wait5>",
