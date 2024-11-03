@@ -7,7 +7,7 @@ set -exu
 ASSUME_ALWAYS_YES=yes pkg install poudriere-devel tree git
 
 TMPFS_BLACKLIST="rust rust-*"
-ALLOW_MAKE_JOBS_PACKAGES="rust-*"
+ALLOW_MAKE_JOBS_PACKAGES="rust rust-* llvm*"
 
 # create poudriere.conf
 DISTFILES_CACHE=/usr/ports/distfiles
@@ -20,7 +20,7 @@ echo FREEBSD_HOST=https://download.FreeBSD.org >> ${CONFIG_FILE}
 echo RESOLV_CONF=/etc/resolv.conf >> ${CONFIG_FILE}
 echo BASEFS=/usr/local/poudriere >> ${CONFIG_FILE}
 echo USE_PORTLINT=no >> ${CONFIG_FILE}
-echo USE_TMPFS=yes >> ${CONFIG_FILE}
+echo USE_TMPFS=no >> ${CONFIG_FILE}
 echo TMPFS_BLACKLIST=\"${TMPFS_BLACKLIST}\" >> ${CONFIG_FILE}
 echo TMPFS_BLACKLIST_TMPDIR=\${BASEFS}/data/cache/tmp >> ${CONFIG_FILE}
 echo DISTFILES_CACHE=${DISTFILES_CACHE} >> ${CONFIG_FILE}
@@ -28,8 +28,11 @@ echo CCACHE_DIR=/var/cache/ccache >> ${CONFIG_FILE}
 echo PACKAGE_FETCH_URL=pkg+http://pkg.FreeBSD.org/\\\${ABI} >> ${CONFIG_FILE}
 echo ALLOW_MAKE_JOBS_PACKAGES=\"${ALLOW_MAKE_JOBS_PACKAGES}\" >> ${CONFIG_FILE}
 
-# build all FLAVORS by default
-echo FLAVOR_DEFAULT_ALL=yes >> ${CONFIG_FILE}
+# disable a logic to find out build failure. takes too much time
+# and disk space
+echo DETERMINE_BUILD_FAILURE_REASON=no >> ${CONFIG_FILE}
+echo "## END of defaults ##" >> ${CONFIG_FILE}
+
 cat "${CONFIG_FILE}"
 
 # create the ports tree
