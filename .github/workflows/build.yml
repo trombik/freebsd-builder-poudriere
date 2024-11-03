@@ -97,7 +97,7 @@ jobs:
           packer init freebsd.pkr.hcl
           ./build.sh '${{ matrix.version }}' '${{ matrix.architecture.name }}' \
             -var 'headless=true' \
-            -var 'disk_size=34' \
+            -var 'disk_size=33G' \
             -var "memory=${MEMORY}"
 
       - name: Copy from previous release
