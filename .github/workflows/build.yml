@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Maximize build space
-        if: runner.os == "Linux"
+        if: runner.os == 'Linux'
         uses: AdityaGarg8/remove-unwanted-software@8831c82abf29b34eb2caac48d5f999ecfc0d8eef
         with:
           remove-android: "true"
@@ -43,7 +43,7 @@ jobs:
           remove-cached-tools: "true"
 
       - name: Concatenates the free space on / and /mnt
-        if: runner.os == "Linux"
+        if: runner.os == 'Linux'
         uses: easimon/maximize-build-space@fc881a613ad2a34aca9c9624518214ebc21dfc0c
         with:
           root-reserve-mb: 10240
