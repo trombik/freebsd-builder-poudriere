@@ -76,7 +76,7 @@ jobs:
       #     limit-access-to-actor: true
 
       - name: Install UEFI
-        if: matrix.architecture.name == "arm64"
+        if: matrix.architecture.name == 'arm64'
         run: sudo cp "$(cat /usr/share/qemu/firmware/60-edk2-aarch64.json | jq .mapping.executable.filename -r)" edk2-aarch64-code.fd
 
       - name: Build Image
