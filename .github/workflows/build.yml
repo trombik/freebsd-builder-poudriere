@@ -1,11 +1,13 @@
+---
+
 name: Build VM Disk Image
 
-on:
+"on":
   push:
     branches:
-      - '*'
+      - "*"
     tags:
-      - 'v*'
+      - "v*"
   pull_request:
     branches:
       - master
@@ -15,33 +17,33 @@ jobs:
     name: ${{ matrix.version }} ${{ matrix.architecture.name }}
     runs-on: ubuntu-24.04
     strategy:
-        fail-fast: false
-        matrix:
-          version:
-            - '14.1'
+      fail-fast: false
+      matrix:
+        version:
+          - "14.1"
 
-          architecture:
-            - name: x86-64
-              qemu: x86
+        architecture:
+          - name: x86-64
+            qemu: x86
 
-            - name: arm64
-              qemu: aarch64
+          - name: arm64
+            qemu: aarch64
 
     steps:
       - name: Maximize build space
-        if: runner.os == 'Linux'
+        if: runner.os == "Linux"
         uses: AdityaGarg8/remove-unwanted-software@8831c82abf29b34eb2caac48d5f999ecfc0d8eef
         with:
-          remove-android: 'true'
-          remove-dotnet: 'true'
-          remove-haskell: 'true'
-          remove-codeql: 'true'
-          remove-docker-images: 'true'
-          remove-large-packages: 'true'
-          remove-cached-tools: 'true'
+          remove-android: "true"
+          remove-dotnet: "true"
+          remove-haskell: "true"
+          remove-codeql: "true"
+          remove-docker-images: "true"
+          remove-large-packages: "true"
+          remove-cached-tools: "true"
 
       - name: Concatenates the free space on / and /mnt
-        if: runner.os == 'Linux'
+        if: runner.os == "Linux"
         uses: easimon/maximize-build-space@fc881a613ad2a34aca9c9624518214ebc21dfc0c
         with:
           root-reserve-mb: 10240
@@ -74,11 +76,11 @@ jobs:
       #     limit-access-to-actor: true
 
       - name: Install UEFI
-        if: matrix.architecture.name == 'arm64'
+        if: matrix.architecture.name == "arm64"
         run: sudo cp "$(cat /usr/share/qemu/firmware/60-edk2-aarch64.json | jq .mapping.executable.filename -r)" edk2-aarch64-code.fd
 
       - name: Build Image
-        if: '!matrix.copy_from_previous_release'
+        if: "!matrix.copy_from_previous_release"
         env:
           PACKER_LOG: 1
         shell: sh
