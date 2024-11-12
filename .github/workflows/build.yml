@@ -86,7 +86,7 @@ jobs:
         shell: sh
         run: |
           MEMORY=8192
-          DISK_SIZE=50G
+          DISK_SIZE=45G
 
           # the VM does not boot on aarch64:
           # qemu-system-aarch64: Addressing limited to 32 bits
