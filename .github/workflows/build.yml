@@ -48,6 +48,22 @@ jobs:
               uname: amd64
 
     steps:
+      - name: Maximize build space
+        if: runner.os == 'Linux'
+        # 0.8.1
+        uses: hugoalh/disk-space-optimizer-ghaction@473a0f269fe1dd4642c48518a323b231680428aa
+        with:
+          operate_sudo: "True"
+          apt_enable: "True"
+          apt_prune: "True"
+          apt_clean: "True"
+          general_include: ".+"
+          docker_prune: "True"
+          docker_clean: "True"
+          npm_enable: "True"
+          npm_prune: "True"
+          npm_clean: "True"
+
       - name: Clone Repository
         uses: actions/checkout@v4
         with:
@@ -76,6 +92,10 @@ jobs:
       #   uses: mxschmitt/action-tmate@v3
       #   with:
       #     limit-access-to-actor: true
+
+      - name: Install UEFI
+        if: matrix.architecture.name == 'arm64'
+        run: sudo cp "$(cat /usr/share/qemu/firmware/60-edk2-aarch64.json | jq .mapping.executable.filename -r)" edk2-aarch64-code.fd
 
       - name: Build Image
         if: '!matrix.copy_from_previous_release'
