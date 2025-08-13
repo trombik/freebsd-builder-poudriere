@@ -18,10 +18,10 @@ jobs:
     name: ${{ matrix.version }} ${{ matrix.architecture.name }}
     runs-on: ubuntu-latest
     strategy:
-        fail-fast: false
-        matrix:
-          version:
-            - '14.3'
+      fail-fast: false
+      matrix:
+        version:
+          - '14.3'
 
         architecture:
           - name: x86-64
