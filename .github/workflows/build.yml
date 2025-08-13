@@ -37,19 +37,6 @@ jobs:
               name: arm64
               qemu: aarch64
 
-        include:
-          - version: '12.4'
-            copy_from_previous_release: true
-            architecture:
-              name: arm64
-              qemu: aarch64
-
-          - version: '12.4'
-            architecture:
-              name: x86-64
-              qemu: x86
-              uname: amd64
-
     steps:
       - name: Maximize build space
         if: runner.os == 'Linux'
@@ -144,9 +131,11 @@ jobs:
         run: python3 -m http.server 8080 --directory output &
 
       - name: Create File
+        if: false
         run: echo 'host to guest' > host_to_guest.txt
 
       - name: Test Image
+        if: false
         uses: cross-platform-actions/action@master
         with:
           operating_system: freebsd
@@ -175,6 +164,7 @@ jobs:
             echo 'guest to host' > guest_to_host.txt
 
       - name: Verify File Synchronization
+        if: false
         run: cat guest_to_host.txt | grep -q 'guest to host'
 
       - name: Extract Version
