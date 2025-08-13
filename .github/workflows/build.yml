@@ -3,6 +3,7 @@
 name: Build VM Disk Image
 
 "on":
+  workflow_dispatch:
   push:
     branches:
       - "*"
